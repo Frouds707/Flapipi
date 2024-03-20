@@ -1,5 +1,6 @@
 using System;
 using UnityEditor;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,8 +43,15 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOver.SetActive(true);
-        playButton.SetActive(true);
+   
+        StartCoroutine(WaitForFunction());
+        //playButton.SetActive(true);
         Pause();
+    }
+    IEnumerator WaitForFunction()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        playButton.SetActive(true);
     }
 
     public void IncreaseScore()
@@ -52,3 +60,4 @@ public class GameManager : MonoBehaviour
         scoreText.text = score.ToString();
     }
 }
+

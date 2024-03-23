@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject playButton;
     public GameObject gameOver;
     private int score;
+    private bool bNotFerst;
 
     private void Awake()
     {
@@ -27,11 +28,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         player.enabled = true;
 
+        if (bNotFerst)
+        {
+            player.onChangeBeard();
+        }
+
         Pipes[] pipes = FindObjectsOfType<Pipes>();
         for (int i = 0; i < pipes.Length; i++)
         {
             Destroy(pipes[i].gameObject);
         }
+
+        bNotFerst = true;
     }
 
     public void Pause()

@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
     private Vector3 direction;
     public float gravity = -9.8f;
     public float strength = 5f;
+    public GameObject[] Beards;
 
     private void OnEnable()
     {
@@ -37,5 +39,11 @@ public class Player : MonoBehaviour
         {
             FindObjectOfType<GameManager>().IncreaseScore();
         }
+    }
+
+    public void onChangeBeard()
+    {
+        var NewBeard = Beards[Random.Range(0, Beards.Length)].GetComponent<Animator>().runtimeAnimatorController;
+        GetComponent<Animator>().runtimeAnimatorController = NewBeard;
     }
 }
